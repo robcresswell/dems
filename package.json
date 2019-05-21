@@ -1,0 +1,26 @@
+{
+  "name": "dems",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "repository": "https://github.com/robcresswell/dems",
+  "author": "Rob Cresswell <robcresswell@users.noreply.github.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "ncc build src/index.ts -o dist",
+    "test": "npx snyk test"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "devDependencies": {
+    "@types/mri": "^1.1.0",
+    "@types/mustache": "^0.8.32",
+    "@types/node": "^12.0.2",
+    "@types/tar": "^4.0.0",
+    "@zeit/ncc": "^0.18.5",
+    "mri": "^1.1.4",
+    "mustache": "^3.0.1",
+    "tar": "^4.4.8",
+    "typescript": "^3.4.5"
+  }
+}
