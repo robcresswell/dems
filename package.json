@@ -1,0 +1,37 @@
+{
+  "name": "dems",
+  "version": "0.0.5",
+  "bin": "./bin/index.js",
+  "files": [
+    "bin/index.js"
+  ],
+  "repository": "https://github.com/robcresswell/dems",
+  "author": "Rob Cresswell <robcresswell@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "ncc build src/index.ts --minify --out bin --quiet --no-source-map-register",
+    "debug": "NODE_DEBUG='dems' node bin/index.js",
+    "format": "prettier --write src/*.ts",
+    "lint": "prettier --check src/*.ts",
+    "test": "npx snyk test --dev"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "directories": {
+    "bin": "bin"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/mustache": "^0.8.32",
+    "@types/node": "^12.0.8",
+    "@types/tar-fs": "^1.16.1",
+    "@zeit/ncc": "^0.19.1",
+    "jest": "^24.8.0",
+    "mustache": "^3.0.1",
+    "prettier": "^1.18.2",
+    "tar-fs": "^2.0.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2"
+  }
+}

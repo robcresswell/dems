@@ -1,0 +1,21 @@
+# Ignore build files
+bin/
+dist/
+
+# Ignore any logs generated
+*.log
+
+# We use Yarn, so ignore package-lock
+package-lock.json
+
+# Installed dependencies
+node_modules/
+
+# Generated code coverage reports
+coverage/
+
+# Ignore the demo repo so its not accidentally commited to source during dev
+dems-example/
+
+# Ignore any temporary data during work / testing things
+tmp
