@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/dems
+    docker:
+      - image: node:12-stretch-slim
+    steps:
+      - checkout
+      - run:
+          name: Install fixed dependencies from lockfile
+          command: yarn --frozen-lockfile
+      - run:
+          name: Run linting tasks
+          command: yarn lint
+      - run:
+          name: Run tests
+          command: yarn test
+      - store_artifacts:
+          path: coverage
+      - store_test_results:
+          path: coverage

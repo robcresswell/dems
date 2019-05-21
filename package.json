@@ -1,0 +1,45 @@
+{
+  "name": "dems",
+  "version": "0.0.8",
+  "bin": "./bin/index.js",
+  "files": [
+    "bin/index.js"
+  ],
+  "repository": "https://github.com/robcresswell/dems",
+  "author": "Rob Cresswell <robcresswell@users.noreply.github.com>",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "ncc build src/index.ts --minify --out bin --quiet --no-source-map-register",
+    "debug": "NODE_DEBUG='dems' node bin/index.js",
+    "format": "eslint --fix {src,test}/*.ts && prettier --write {src,test}/*.ts",
+    "lint": "eslint {src,test}/*.ts && prettier --check {src,test}/*.ts",
+    "test": "jest --runInBand --ci"
+  },
+  "engines": {
+    "node": ">=10"
+  },
+  "directories": {
+    "bin": "bin"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/mustache": "^0.8.32",
+    "@types/node": "^12.0.10",
+    "@types/tar-fs": "^1.16.1",
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "@zeit/ncc": "^0.20.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-jest": "^22.7.1",
+    "jest": "^24.8.0",
+    "jest-junit": "^6.4.0",
+    "mustache": "^3.0.1",
+    "prettier": "^1.18.2",
+    "tar-fs": "^2.0.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.5.2"
+  }
+}
