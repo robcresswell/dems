@@ -32,6 +32,6 @@
     "prettier": "^1.17.1",
     "tar-fs": "^2.0.0",
     "ts-jest": "^24.0.2",
-    "typescript": "^3.5.1"
+    "typescript": "^3.5.2"
   }
 }
