@@ -5,6 +5,10 @@
 ![Dependency status for latest release](https://img.shields.io/librariesio/release/npm/dems.svg?style=for-the-badge)
 ![Vulnerability count from Snyk](https://img.shields.io/snyk/vulnerabilities/npm/dems.svg?style=for-the-badge)
 
+> dems is currently at a 0.x release and it may break at any point. Feel free to
+> use or test it for one-off bootstrapping, but do not rely on it as part of
+> scripts until 1.x has been released.
+
 A combination of `degit` and `ms` (for `mustache`). This is a scaffolding tool
 that downloads a given repository from GitHub / GitLab / BitBucket and
 optionally replaces any designated variables in it. Without variables, this acts
@@ -47,13 +51,11 @@ have to replace several simple strings; package name and author fields for
 example, so `dems` provides a solution. If you also find yourself experiencing
 this, give `dems` a go.
 
-## This code is really bad! It's missing $FEATURE! I found a bug!
+## This code is really bad! It's missing \$FEATURE! I found a bug!
 
-- Its a big imperative script with comments. It's easy to read so my tiny brain
-  can remember how it works.
-- [Open an issue](https://github.com/robcresswell/dems/issues/new). If I agree
-  with you, I'll probably fix the bug / add the feature, but it'll be in my own
-  time. If you need it sooner, open a Pull Request or fork for your own needs.
+[Open an issue](https://github.com/robcresswell/dems/issues/new). If I agree
+with you, I'll probably fix the bug / add the feature, but it'll be in my own
+time. If you need it sooner, open a Pull Request or fork for your own needs.
 
 ## Credits
 
