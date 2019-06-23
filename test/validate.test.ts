@@ -18,8 +18,21 @@ describe('validate', () => {
   });
 
   it('retrieves an archive URL for GitHub', async () => {
-    const url = 'https://github.com/robcresswell/dems-example';
-    const { archiveUrl } = await getValidConfig(url);
+    const descriptor = 'https://github.com/robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(descriptor);
+
+    expect(pExecMock).toHaveBeenCalledTimes(1);
+    expect(pExecMock).toHaveBeenCalledWith(
+      'git ls-remote https://github.com/robcresswell/dems-example',
+    );
+    expect(archiveUrl).toBe(
+      'https://github.com/robcresswell/dems-example/archive/0efcb30d0a12d6f00ff476aec0642cb6253d7a90.tar.gz',
+    );
+  });
+
+  it('retrieves an archive URL for GitHub (shorthand)', async () => {
+    const descriptor = 'github:robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(descriptor);
 
     expect(pExecMock).toHaveBeenCalledTimes(1);
     expect(pExecMock).toHaveBeenCalledWith(
@@ -31,8 +44,21 @@ describe('validate', () => {
   });
 
   it('retrieves an archive URL for GitLab', async () => {
-    const url = 'https://gitlab.com/robcresswell/dems-example';
-    const { archiveUrl } = await getValidConfig(url);
+    const descriptor = 'https://gitlab.com/robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(descriptor);
+
+    expect(pExecMock).toHaveBeenCalledTimes(1);
+    expect(pExecMock).toHaveBeenCalledWith(
+      'git ls-remote https://gitlab.com/robcresswell/dems-example',
+    );
+    expect(archiveUrl).toBe(
+      'https://gitlab.com/robcresswell/dems-example/repository/archive.tar.gz?ref=0efcb30d0a12d6f00ff476aec0642cb6253d7a90',
+    );
+  });
+
+  it('retrieves an archive URL for GitLab (shorthand)', async () => {
+    const descriptor = 'gitlab:robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(descriptor);
 
     expect(pExecMock).toHaveBeenCalledTimes(1);
     expect(pExecMock).toHaveBeenCalledWith(
@@ -44,8 +70,21 @@ describe('validate', () => {
   });
 
   it('retrieves an archive URL for Bitbucket', async () => {
-    const url = 'https://bitbucket.org/robcresswell/dems-example';
-    const { archiveUrl } = await getValidConfig(url);
+    const descriptor = 'https://bitbucket.org/robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(descriptor);
+
+    expect(pExecMock).toHaveBeenCalledTimes(1);
+    expect(pExecMock).toHaveBeenCalledWith(
+      'git ls-remote https://bitbucket.org/robcresswell/dems-example',
+    );
+    expect(archiveUrl).toBe(
+      'https://bitbucket.org/robcresswell/dems-example/get/0efcb30d0a12d6f00ff476aec0642cb6253d7a90.tar.gz',
+    );
+  });
+
+  it('retrieves an archive URL for Bitbucket (shorthand)', async () => {
+    const descriptor = 'bitbucket:robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(descriptor);
 
     expect(pExecMock).toHaveBeenCalledTimes(1);
     expect(pExecMock).toHaveBeenCalledWith(

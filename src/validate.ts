@@ -7,12 +7,10 @@ import { debug } from './log';
 import { getScmInfo } from './get-scm-info';
 
 const scmArchiveUrls = {
-  gitlab: (repo: string, sha: string) =>
-    `https://gitlab.com/${repo}/repository/archive.tar.gz?ref=${sha}`,
-  bitbucket: (repo: string, sha: string) =>
-    `https://bitbucket.org/${repo}/get/${sha}.tar.gz`,
-  github: (repo: string, sha: string) =>
-    `https://github.com/${repo}/archive/${sha}.tar.gz`,
+  gitlab: (url: string, sha: string) =>
+    `${url}/repository/archive.tar.gz?ref=${sha}`,
+  bitbucket: (url: string, sha: string) => `${url}/get/${sha}.tar.gz`,
+  github: (url: string, sha: string) => `${url}/archive/${sha}.tar.gz`,
 };
 
 /**
@@ -27,16 +25,16 @@ const scmArchiveUrls = {
  * @param dest A user input target directory
  */
 export async function getValidConfig(
-  url?: string,
+  descriptor?: string,
   dest?: string,
 ): Promise<Config> {
   debug('Checking source is supplied');
-  if (typeof url === 'undefined' || url.length === 0) {
+  if (typeof descriptor === 'undefined' || descriptor.length === 0) {
     throw new MissingSourceArgError();
   }
 
   debug('Checking source is valid');
-  const { repo, type } = getScmInfo(url);
+  const { url, type } = getScmInfo(descriptor);
   debug(`Valid source: ${url}`);
 
   const { stdout } = await pExec(`git ls-remote ${url}`);
@@ -56,7 +54,7 @@ export async function getValidConfig(
   const sha = shaRefMap.HEAD;
   debug(`SHA: ${sha}`);
 
-  const archiveUrl = scmArchiveUrls[type](repo, sha);
+  const archiveUrl = scmArchiveUrls[type](url, sha);
   debug(`Archive URL: ${archiveUrl}`);
 
   debug('Checking dest is valid');

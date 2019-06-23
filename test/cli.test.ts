@@ -1,16 +1,25 @@
 import { mocked } from 'ts-jest/utils';
+import { promises as fsp } from 'fs';
+import { resolve } from 'path';
 import { cli } from '../src/cli';
-import { getValidConfig } from '../src/validate';
-import { InvalidSourceError } from '../src/errors';
+import { prompt } from '../src/prompt';
+import { removeTestDir } from './cleanup';
 
-// mock the parts of the CLI that have side effects on the file system
-jest.mock('../src/validate');
-jest.mock('../src/download-repo');
+jest.mock('../src/prompt');
 
 describe('cli', () => {
-  const validateMock = mocked(getValidConfig);
+  fsp.writeFile = jest.fn();
+  const promptMock = mocked(prompt);
+  const writeMock = mocked(fsp.writeFile);
+
+  beforeEach(() => {
+    writeMock.mockResolvedValue();
+  });
+
   afterEach(() => {
-    validateMock.mockReset();
+    writeMock.mockRestore();
+    promptMock.mockReset();
+    removeTestDir();
   });
 
   it('prints help text when passed "-h"', async () => {
@@ -30,9 +39,6 @@ describe('cli', () => {
   });
 
   it('propagates error codes and messages', async () => {
-    validateMock.mockImplementationOnce(async () => {
-      throw new InvalidSourceError();
-    });
     const args = ['not-a-valid-source'];
     const { code, message } = await cli(args);
 
@@ -41,16 +47,36 @@ describe('cli', () => {
   });
 
   it('propagates success codes and messages', async () => {
-    validateMock.mockImplementationOnce(async () => {
-      return {
-        resolvedDest: 'dest',
-        archiveUrl: 'https://foo',
-      };
-    });
-    const args = ['github:valid/source'];
+    promptMock.mockResolvedValueOnce('foo');
+    promptMock.mockResolvedValueOnce('bar');
+
+    const args = ['github:robcresswell/dems-example'];
     const { code, message } = await cli(args);
 
     expect(code).toBe(0);
     expect(message.toLowerCase()).toEqual(expect.stringContaining('success'));
+  });
+
+  describe('e2e scenarios', () => {
+    it('downloads a repo and renders files with user input variables', async () => {
+      promptMock.mockResolvedValueOnce('foo');
+      promptMock.mockResolvedValueOnce('bar');
+
+      const args = ['github:robcresswell/dems-example'];
+      const { code } = await cli(args);
+
+      expect(writeMock).toHaveBeenCalledTimes(4);
+      expect(writeMock).toHaveBeenNthCalledWith(
+        1,
+        resolve('dems-example', 'LICENSE.md'),
+        expect.any(String),
+      );
+      expect(writeMock).toHaveBeenNthCalledWith(
+        2,
+        resolve('dems-example', 'README.md'),
+        expect.any(String),
+      );
+      expect(code).toBe(0);
+    });
   });
 });

@@ -20,10 +20,7 @@ export async function cli(
 
   try {
     const { resolvedDest, archiveUrl } = await getValidConfig(...args);
-
-    // TODO: Clean up this side-effect nightmare
-    const templateVariables: Set<string> = new Set();
-    await downloadRepo(archiveUrl, resolvedDest, templateVariables);
+    const templateVariables = await downloadRepo(archiveUrl, resolvedDest);
 
     if (templateVariables.size > 0) {
       const variables: { [key: string]: string } = {};
