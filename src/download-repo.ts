@@ -22,7 +22,7 @@ function getMapStream(templateVariables: Set<string>) {
       fileStream.on('end', () => {
         const template: string[] = parse(templateChunks.join(''));
         template
-          .filter((entry) => entry[0] !== 'text')
+          .filter((entry) => entry[0] === 'name')
           .map((entry) => entry[1])
           .forEach((entry) => templateVariables.add(entry));
       });

@@ -1,5 +1,4 @@
 import { render } from 'mustache';
-// import { readdir, writeFileSync, readFileSync } from 'fs';
 import { promises as fsp } from 'fs';
 import { join } from 'path';
 import { debug } from './log';
