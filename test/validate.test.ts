@@ -5,7 +5,6 @@ import { pExec } from '../src/exec-promise';
 jest.mock('../src/exec-promise');
 
 describe('validate', () => {
-  const url = 'https://github.com/robcresswell/dems-example';
   const sha = '0efcb30d0a12d6f00ff476aec0642cb6253d7a90';
   const ref = 'HEAD';
   const pExecMock = mocked(pExec);
@@ -14,7 +13,12 @@ describe('validate', () => {
     stderr: '',
   }));
 
-  it('retrieves an archive URL to download', async () => {
+  afterEach(() => {
+    pExecMock.mockClear();
+  });
+
+  it('retrieves an archive URL for GitHub', async () => {
+    const url = 'https://github.com/robcresswell/dems-example';
     const { archiveUrl } = await getValidConfig(url);
 
     expect(pExecMock).toHaveBeenCalledTimes(1);
@@ -23,6 +27,32 @@ describe('validate', () => {
     );
     expect(archiveUrl).toBe(
       'https://github.com/robcresswell/dems-example/archive/0efcb30d0a12d6f00ff476aec0642cb6253d7a90.tar.gz',
+    );
+  });
+
+  it('retrieves an archive URL for GitLab', async () => {
+    const url = 'https://gitlab.com/robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(url);
+
+    expect(pExecMock).toHaveBeenCalledTimes(1);
+    expect(pExecMock).toHaveBeenCalledWith(
+      'git ls-remote https://gitlab.com/robcresswell/dems-example',
+    );
+    expect(archiveUrl).toBe(
+      'https://gitlab.com/robcresswell/dems-example/repository/archive.tar.gz?ref=0efcb30d0a12d6f00ff476aec0642cb6253d7a90',
+    );
+  });
+
+  it('retrieves an archive URL for Bitbucket', async () => {
+    const url = 'https://bitbucket.org/robcresswell/dems-example';
+    const { archiveUrl } = await getValidConfig(url);
+
+    expect(pExecMock).toHaveBeenCalledTimes(1);
+    expect(pExecMock).toHaveBeenCalledWith(
+      'git ls-remote https://bitbucket.org/robcresswell/dems-example',
+    );
+    expect(archiveUrl).toBe(
+      'https://bitbucket.org/robcresswell/dems-example/get/0efcb30d0a12d6f00ff476aec0642cb6253d7a90.tar.gz',
     );
   });
 
