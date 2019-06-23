@@ -33,4 +33,18 @@ describe('walk', () => {
       'bar',
     );
   });
+
+  it('ignores symlinks', async () => {
+    const templateVariables = {
+      name: 'foo',
+      title: 'bar',
+    };
+    await walkAndRender('./test/fixtures/test-dir', templateVariables);
+
+    expect(writeMock).toHaveBeenCalledTimes(2);
+
+    expect(writeMock).not.toHaveBeenCalledWith(
+      'test/fixtures/test-dir/nested/file3',
+    );
+  });
 });
