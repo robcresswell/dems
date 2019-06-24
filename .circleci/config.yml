@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  build:
+  test:
     working_directory: ~/dems
     docker:
       - image: node:12-stretch-slim
@@ -19,3 +19,22 @@ jobs:
           path: coverage
       - store_test_results:
           path: coverage
+  release:
+    working_directory: ~/dems
+    docker:
+      - image: node:12-stretch-slim
+    steps:
+      - checkout
+      - run:
+          command: apt update && apt install -y git
+      - run: yarn --frozen-lockfile
+      - run: yarn build
+      - run: npx semantic-release
+workflows:
+  version: 2
+  test_and_release:
+    jobs:
+      - test
+      - release:
+          requires:
+            - test
