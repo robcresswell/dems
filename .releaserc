@@ -1,7 +1,5 @@
 {
-  "release": {
-    "branch": "dev"
-  },
+  "branch": "dev",
   "plugins": [
     [
       "@semantic-release/github",
