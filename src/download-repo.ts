@@ -37,9 +37,11 @@ function getMapStream(templateVariables: Set<string>) {
 export async function downloadRepo(
   archiveUrl: string,
   dest: string,
-  templateVariables: Set<string>,
-) {
+): Promise<Set<string>> {
   return new Promise((resolve, reject) => {
+    // TODO: Clean up this side-effect nightmare
+    const templateVariables: Set<string> = new Set();
+
     // eslint-disable-next-line consistent-return
     get(archiveUrl, (response) => {
       if (!response.statusCode || response.statusCode >= 400) {
@@ -57,10 +59,7 @@ export async function downloadRepo(
           );
         }
 
-        downloadRepo(redirectUrl, dest, templateVariables).then(
-          resolve,
-          reject,
-        );
+        downloadRepo(redirectUrl, dest).then(resolve, reject);
       } else {
         const mapStream = getMapStream(templateVariables);
         response
@@ -71,7 +70,7 @@ export async function downloadRepo(
               mapStream,
             }),
           )
-          .on('finish', resolve)
+          .on('finish', () => resolve(templateVariables))
           .on('error', reject);
       }
     });

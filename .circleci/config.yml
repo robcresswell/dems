@@ -3,8 +3,11 @@ jobs:
   test:
     working_directory: ~/dems
     docker:
-      - image: node:12-stretch-slim
+      - image: node:12-alpine
     steps:
+      - run:
+          name: Install certificate handling for artifact uploading
+          command: apk --update add ca-certificates git
       - checkout
       - run:
           name: Install fixed dependencies from lockfile
@@ -22,11 +25,11 @@ jobs:
   release:
     working_directory: ~/dems
     docker:
-      - image: node:12-stretch-slim
+      - image: node:12-alpine
     steps:
       - checkout
       - run:
-          command: apt update && apt install -y git
+          command: apk --update add git
       - run: yarn --frozen-lockfile
       - run: yarn build
       - run: npx semantic-release
