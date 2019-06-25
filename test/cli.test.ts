@@ -58,25 +58,35 @@ describe('cli', () => {
   });
 
   describe('e2e scenarios', () => {
-    it('downloads a repo and renders files with user input variables', async () => {
-      promptMock.mockResolvedValueOnce('foo');
-      promptMock.mockResolvedValueOnce('bar');
+    const specs = [
+      ['robcresswell/dems-example'],
+      ['github:robcresswell/dems-example'],
+      ['https://github.com/robcresswell/dems-example'],
+      ['gitlab:robcresswell/dems-example'],
+      ['https://gitlab.com/robcresswell/dems-example'],
+      ['bitbucket:robcresswell/dems-example'],
+      ['https://bitbucket.org/robcresswell/dems-example'],
+    ];
 
-      const args = ['github:robcresswell/dems-example'];
-      const { code } = await cli(args);
+    specs.forEach(([url]) => {
+      it(`works when passed ${url}`, async () => {
+        promptMock.mockResolvedValueOnce('foo');
+        promptMock.mockResolvedValueOnce('bar');
 
-      expect(writeMock).toHaveBeenCalledTimes(4);
-      expect(writeMock).toHaveBeenNthCalledWith(
-        1,
-        resolve('dems-example', 'LICENSE.md'),
-        expect.any(String),
-      );
-      expect(writeMock).toHaveBeenNthCalledWith(
-        2,
-        resolve('dems-example', 'README.md'),
-        expect.any(String),
-      );
-      expect(code).toBe(0);
+        const args = ['github:robcresswell/dems-example'];
+        const { code } = await cli(args);
+
+        expect(writeMock).toHaveBeenCalledTimes(4);
+        expect(writeMock).toHaveBeenCalledWith(
+          resolve('dems-example', 'LICENSE.md'),
+          expect.any(String),
+        );
+        expect(writeMock).toHaveBeenCalledWith(
+          resolve('dems-example', 'README.md'),
+          expect.any(String),
+        );
+        expect(code).toBe(0);
+      });
     });
   });
 });
