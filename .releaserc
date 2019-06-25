@@ -1,0 +1,13 @@
+{
+  "release": {
+    "branch": "dev"
+  },
+  "plugins": [
+    [
+      "@semantic-release/github",
+      {
+        "successComment": false
+      }
+    ],
+  ]
+}
