@@ -2,8 +2,7 @@ import { walkAndRender } from './walk';
 import { help } from './help';
 import { getValidConfig } from './validate';
 import { downloadRepo } from './download-repo';
-import { prompt } from './prompt';
-import { debug } from './log';
+import { askQuestions } from './ask-questions';
 
 export async function cli(
   args: string[],
@@ -23,18 +22,7 @@ export async function cli(
     const templateVariables = await downloadRepo(archiveUrl, resolvedDest);
 
     if (templateVariables.size > 0) {
-      const variables: { [key: string]: string } = {};
-      const questions = Array.from(templateVariables);
-
-      for (let i = 0; i < questions.length; i += 1) {
-        const question = questions[i];
-        // eslint-disable-next-line no-await-in-loop
-        const answer = await prompt(question);
-        variables[question] = answer;
-      }
-
-      debug(`Variables: ${JSON.stringify(variables, null, 2)}`);
-
+      const variables = await askQuestions(templateVariables);
       await walkAndRender(resolvedDest, variables);
     }
 

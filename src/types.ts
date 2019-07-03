@@ -8,3 +8,9 @@ export interface Config {
 export interface CommitSHAMap {
   [key: string]: string;
 }
+
+export interface Question {
+  comment?: string;
+  variable: string;
+  type: 'variable' | ' section';
+}
