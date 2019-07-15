@@ -8,10 +8,10 @@ describe('validate', () => {
   const sha = '0efcb30d0a12d6f00ff476aec0642cb6253d7a90';
   const ref = 'HEAD';
   const pExecMock = mocked(pExec);
-  pExecMock.mockImplementation(async () => ({
+  pExecMock.mockResolvedValue({
     stdout: `${sha}\t${ref}\n`,
     stderr: '',
-  }));
+  });
 
   afterEach(() => {
     pExecMock.mockClear();
