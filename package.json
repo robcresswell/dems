@@ -35,7 +35,7 @@
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jest": "^22.13.6",
     "jest": "^24.8.0",
-    "jest-junit": "^6.4.0",
+    "jest-junit": "^7.0.0",
     "mustache": "^3.0.1",
     "prettier": "^1.18.2",
     "tar-fs": "^2.0.0",
