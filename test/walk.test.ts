@@ -19,7 +19,7 @@ describe('walk', () => {
       name: 'foo',
       title: 'bar',
     };
-    await walkAndRender('./test/fixtures/test-dir', templateVariables);
+    await walkAndRender('./test/fixtures/test-dir', templateVariables, []);
 
     expect(writeMock).toHaveBeenCalledTimes(2);
     expect(writeMock).toHaveBeenNthCalledWith(
@@ -39,7 +39,7 @@ describe('walk', () => {
       name: 'foo',
       title: 'bar',
     };
-    await walkAndRender('./test/fixtures/test-dir', templateVariables);
+    await walkAndRender('./test/fixtures/test-dir', templateVariables, []);
 
     expect(writeMock).toHaveBeenCalledTimes(2);
 

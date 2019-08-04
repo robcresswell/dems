@@ -1,5 +1,5 @@
 import { mocked } from 'ts-jest/utils';
-import { promises as fsp } from 'fs';
+import { promises as fsp, existsSync } from 'fs';
 import { resolve } from 'path';
 import { cli } from '../src/cli';
 import { prompt } from '../src/prompt';
@@ -73,7 +73,7 @@ describe('cli', () => {
         promptMock.mockResolvedValueOnce('foo');
         promptMock.mockResolvedValueOnce('bar');
 
-        const args = ['github:robcresswell/dems-example'];
+        const args = [url];
         const { code } = await cli(args);
 
         expect(writeMock).toHaveBeenCalledTimes(4);
@@ -87,6 +87,33 @@ describe('cli', () => {
         );
         expect(code).toBe(0);
       });
+    });
+
+    it('handles .demsignore files', async () => {
+      promptMock.mockResolvedValueOnce('foo');
+      promptMock.mockResolvedValueOnce('bar');
+
+      const args = ['robcresswell/dems-fixture-with-ignores'];
+      const { code } = await cli(args);
+
+      expect(writeMock).toHaveBeenCalledTimes(4);
+      expect(writeMock).toHaveBeenCalledWith(
+        resolve('dems-fixture-with-ignores', 'LICENSE.md'),
+        expect.any(String),
+      );
+      expect(writeMock).toHaveBeenCalledWith(
+        resolve('dems-fixture-with-ignores', 'README.md'),
+        expect.any(String),
+      );
+
+      // Assert that this file exists, but was not written to
+      const fixtureTestFile = resolve(
+        'dems-fixture-with-ignores',
+        'test/test-file.js',
+      );
+      expect(existsSync(fixtureTestFile)).toBe(true);
+      expect(writeMock).not.toHaveBeenCalledWith(fixtureTestFile);
+      expect(code).toBe(0);
     });
   });
 });

@@ -1,16 +1,35 @@
 import { resolve } from 'path';
 import { existsSync } from 'fs';
-import { MissingSourceArgError, DestExistsError } from './errors';
-import { Config, CommitSHAMap } from './types';
+import {
+  MissingSourceArgError,
+  DestExistsError,
+  InvalidSourceError,
+} from './errors';
+import { Config, CommitSHAMap, SCMType } from './types';
 import { pExec } from './exec-promise';
 import { debug } from './log';
-import { getScmInfo } from './get-scm-info';
+import { getGlobsToIgnore } from './get-globs-to-ignore';
+
+const repoUrlMap = {
+  github: (repo: string) => `https://github.com/${repo}`,
+  gitlab: (repo: string) => `https://gitlab.com/${repo}`,
+  bitbucket: (repo: string) => `https://bitbucket.org/${repo}`,
+};
 
 const scmArchiveUrls = {
   gitlab: (url: string, sha: string) =>
     `${url}/repository/archive.tar.gz?ref=${sha}`,
   bitbucket: (url: string, sha: string) => `${url}/get/${sha}.tar.gz`,
   github: (url: string, sha: string) => `${url}/archive/${sha}.tar.gz`,
+};
+
+const ignoreFileUrls = {
+  gitlab: (repo: string, sha: string) =>
+    `https://gitlab.com/${repo}/raw/${sha}/.demsignore`,
+  bitbucket: (repo: string, sha: string) =>
+    `https://bitbucket.org/${repo}/raw/${sha}/.demsignore`,
+  github: (repo: string, sha: string) =>
+    `https://raw.githubusercontent.com/${repo}/${sha}/.demsignore`,
 };
 
 /**
@@ -34,7 +53,17 @@ export async function getValidConfig(
   }
 
   debug('Checking source is valid');
-  const { url, type } = getScmInfo(descriptor);
+  const pattern = /(?:https:\/\/|git@)?(github|bitbucket|gitlab)?(?::)?(?:\.org|\.com)?(?:\/|:)?([\w-]+\/[\w-]+)(?:\.git)?/;
+  const match = descriptor.match(pattern);
+
+  if (!match) {
+    throw new InvalidSourceError();
+  }
+
+  const type = (match[1] || 'github') as SCMType;
+  const repo = match[2];
+  const url = repoUrlMap[type](repo);
+
   debug(`Valid source: ${url}`);
 
   const { stdout } = await pExec(`git ls-remote ${url}`);
@@ -57,6 +86,12 @@ export async function getValidConfig(
   const archiveUrl = scmArchiveUrls[type](url, sha);
   debug(`Archive URL: ${archiveUrl}`);
 
+  const ignoreFileUrl = ignoreFileUrls[type](repo, sha);
+  debug(`Ignore file URL: ${ignoreFileUrl}`);
+
+  const ignoreGlobs = await getGlobsToIgnore(ignoreFileUrl);
+  debug(`Globs to ignore: ${ignoreGlobs}`);
+
   debug('Checking dest is valid');
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const resolvedDest = resolve(dest || url.split('/').pop()!);
@@ -65,5 +100,5 @@ export async function getValidConfig(
   }
   debug(`Valid dest: ${resolvedDest}`);
 
-  return { resolvedDest, archiveUrl };
+  return { resolvedDest, archiveUrl, ignoreGlobs };
 }
