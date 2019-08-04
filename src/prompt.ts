@@ -3,8 +3,6 @@ import { createInterface } from 'readline';
 /**
  * Prompts for user input, displaying the given `question` string, and returns
  * the users input a a string
- *
- * @param question
  */
 export async function prompt(question: string): Promise<string> {
   const rl = createInterface({
