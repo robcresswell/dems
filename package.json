@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/jest": "^24.0.17",
+    "@types/minimatch": "^3.0.3",
     "@types/mustache": "^0.8.32",
     "@types/node": "^12.7.0",
     "@types/tar-fs": "^1.16.1",
@@ -36,14 +37,11 @@
     "eslint-plugin-jest": "^22.14.1",
     "jest": "^24.8.0",
     "jest-junit": "^7.0.0",
+    "minimatch": "^3.0.4",
     "mustache": "^3.0.1",
     "prettier": "^1.18.2",
     "tar-fs": "^2.0.0",
     "ts-jest": "^24.0.2",
     "typescript": "^3.5.3"
-  },
-  "dependencies": {
-    "@types/minimatch": "^3.0.3",
-    "minimatch": "^3.0.4"
   }
 }
