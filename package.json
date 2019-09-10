@@ -29,7 +29,7 @@
     "@types/tar-fs": "^1.16.1",
     "@typescript-eslint/eslint-plugin": "^1.13.0",
     "@typescript-eslint/parser": "^1.13.0",
-    "@zeit/ncc": "^0.20.4",
+    "@zeit/ncc": "^0.20.5",
     "eslint": "^6.3.0",
     "eslint-config-airbnb-base": "^13.2.0",
     "eslint-config-prettier": "^6.2.0",
