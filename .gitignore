@@ -12,7 +12,7 @@ package-lock.json
 node_modules/
 
 # Generated code coverage reports
-coverage/
+reports/
 
 # Ignore the demo repo so its not accidentally commited to source during dev
 dems-example/

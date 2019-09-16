@@ -13,5 +13,14 @@ module.exports = {
   //   },
   // },
   coverageReporters: ['html', 'text-summary'],
-  reporters: ['default', ['jest-junit', { output: './coverage/junit.xml' }]],
+  coverageDirectory: 'reports/coverage',
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      {
+        outputDirectory: '<rootDir>/reports/jest',
+      },
+    ],
+  ],
 };
