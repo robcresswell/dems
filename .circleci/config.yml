@@ -37,9 +37,9 @@ jobs:
           name: Run tests
           command: yarn test
       - store_artifacts:
-          path: coverage
+          path: reports/coverage
       - store_test_results:
-          path: coverage
+          path: reports
   lint:
     <<: *defaults
     steps:
