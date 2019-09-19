@@ -22,6 +22,13 @@ commands:
             - ~/.cache/yarn
           key: yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
 jobs:
+  snyk:
+    <<: *defaults
+    steps:
+      - checkout
+      - run:
+          name: Run snyk
+          command: npx snyk test
   test:
     <<: *defaults
     steps:
@@ -50,6 +57,7 @@ workflows:
   version: 2
   test_and_release:
     jobs:
+      - snyk
       - test
       - lint
       - release:
