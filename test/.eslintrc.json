@@ -1,0 +1,7 @@
+{
+  "parserOptions": {
+    "project": "./test/tsconfig.json",
+    "extraFileExtensions": [".ts"]
+  },
+  "extends": ["../.eslintrc.json"]
+}

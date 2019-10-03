@@ -76,7 +76,6 @@ export async function getValidConfig(
         acc[ref] = sha;
         return acc;
       },
-      // eslint-disable-next-line @typescript-eslint/no-object-literal-type-assertion
       {} as CommitSHAMap,
     );
 
