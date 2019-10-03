@@ -1,7 +1,7 @@
 abstract class CustomError extends Error {
   public code: number;
 
-  public constructor(code: number = 1, message: string) {
+  public constructor(code = 1, message: string) {
     super(message);
     this.name = this.constructor.name;
     this.code = code;
