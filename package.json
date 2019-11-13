@@ -22,7 +22,7 @@
     "bin": "bin"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.22",
+    "@types/jest": "^24.0.23",
     "@types/minimatch": "^3.0.3",
     "@types/mustache": "^0.8.32",
     "@types/node": "^12.12.7",
