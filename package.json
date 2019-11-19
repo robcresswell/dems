@@ -28,7 +28,7 @@
     "@types/node": "^12.12.9",
     "@types/tar-fs": "^1.16.1",
     "@typescript-eslint/eslint-plugin": "^2.8.0",
-    "@typescript-eslint/parser": "^2.7.0",
+    "@typescript-eslint/parser": "^2.8.0",
     "@zeit/ncc": "^0.20.5",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.7.0",
