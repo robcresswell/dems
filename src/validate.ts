@@ -71,13 +71,10 @@ export async function getValidConfig(
     .split('\n')
     .filter(Boolean)
     .map((shaRef) => shaRef.split('\t'))
-    .reduce(
-      (acc, [sha, ref]) => {
-        acc[ref] = sha;
-        return acc;
-      },
-      {} as CommitSHAMap,
-    );
+    .reduce((acc, [sha, ref]) => {
+      acc[ref] = sha;
+      return acc;
+    }, {} as CommitSHAMap);
 
   const sha = shaRefMap.HEAD;
   debug(`SHA: ${sha}`);
