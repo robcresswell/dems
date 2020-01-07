@@ -1,6 +1,5 @@
 {
   "name": "dems",
-  "version": "0.0.8",
   "bin": "./bin/index.js",
   "files": [
     "bin/index.js"
