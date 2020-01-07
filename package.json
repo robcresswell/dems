@@ -40,7 +40,7 @@
     "mustache": "^3.2.1",
     "prettier": "^1.19.1",
     "tar-fs": "^2.0.0",
-    "ts-jest": "^24.2.0",
+    "ts-jest": "^24.3.0",
     "typescript": "^3.7.4"
   }
 }
