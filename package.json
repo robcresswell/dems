@@ -24,7 +24,7 @@
     "@types/jest": "^24.9.1",
     "@types/minimatch": "^3.0.3",
     "@types/mustache": "^4.0.0",
-    "@types/node": "^13.1.8",
+    "@types/node": "^13.5.0",
     "@types/tar-fs": "^1.16.2",
     "@typescript-eslint/eslint-plugin": "^2.17.0",
     "@typescript-eslint/parser": "^2.17.0",
