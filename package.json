@@ -21,7 +21,7 @@
     "bin": "bin"
   },
   "devDependencies": {
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^24.9.1",
     "@types/minimatch": "^3.0.3",
     "@types/mustache": "^4.0.0",
     "@types/node": "^13.1.8",
