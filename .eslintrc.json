@@ -4,23 +4,26 @@
     "project": "./tsconfig.json",
     "extraFileExtensions": [".ts"]
   },
+  "env": {
+    "node": true,
+    "es2017": true
+  },
   "plugins": ["jest", "@typescript-eslint"],
   "extends": [
+    "eslint:recommended",
     "plugin:jest/recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "prettier/@typescript-eslint"
   ],
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/await-thenable": 2,
-    "@typescript-eslint/ban-ts-ignore": 2,
-    "@typescript-eslint/no-require-imports": 2,
-    "@typescript-eslint/no-unnecessary-type-assertion": 2,
-    "@typescript-eslint/promise-function-async": 2,
-    "@typescript-eslint/unbound-method": 2,
-    "import/no-extraneous-dependencies": 0,
-    "import/prefer-default-export": 0
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/await-thenable": "error",
+    "@typescript-eslint/ban-ts-ignore": "error",
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/no-unnecessary-type-assertion": "error",
+    "@typescript-eslint/promise-function-async": "error",
+    "@typescript-eslint/unbound-method": "error"
   },
   "settings": {
     "import/resolver": {
