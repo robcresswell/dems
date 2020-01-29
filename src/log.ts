@@ -3,6 +3,7 @@ import { debuglog } from 'util';
 const reset = '\x1b[0m';
 const red = '\x1b[31m';
 const cyan = '\x1b[36m';
+
 export const debug = debuglog('dems');
 
 export function logError(message: string) {
