@@ -1,9 +1,6 @@
 # dems
 
 ![License: Apache-2.0](https://img.shields.io/npm/l/dems.svg?style=for-the-badge)
-![npm download count](https://img.shields.io/npm/dt/dems.svg?style=for-the-badge)
-![Dependency status for latest release](https://img.shields.io/librariesio/release/npm/dems.svg?style=for-the-badge)
-![Vulnerability count from Snyk](https://img.shields.io/snyk/vulnerabilities/npm/dems.svg?style=for-the-badge)
 
 A combination of `degit` and `ms` (for `mustache`). This is a scaffolding tool
 that downloads a given repository from GitHub / GitLab / BitBucket and
