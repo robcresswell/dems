@@ -1,9 +1,9 @@
-import { get } from 'https';
-import { createGunzip } from 'zlib';
-import { extract, Headers } from 'tar-fs';
 import { ReadStream } from 'fs';
+import { get } from 'https';
+import * as minimatch from 'minimatch';
 import { parse } from 'mustache';
-import minimatch from 'minimatch';
+import { extract, Headers } from 'tar-fs';
+import { createGunzip } from 'zlib';
 import { Config } from './types';
 
 function map(header: Headers) {

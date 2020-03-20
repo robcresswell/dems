@@ -1,14 +1,14 @@
-import { resolve } from 'path';
 import { existsSync } from 'fs';
+import { resolve } from 'path';
 import {
-  MissingSourceArgError,
   DestExistsError,
   InvalidSourceError,
+  MissingSourceArgError,
 } from './errors';
-import { Config, CommitSHAMap, SCMType } from './types';
 import { pExec } from './exec-promise';
-import { debug } from './log';
 import { getGlobsToIgnore } from './get-globs-to-ignore';
+import { debug } from './log';
+import { CommitSHAMap, Config, SCMType } from './types';
 
 const repoUrlMap = {
   github: (repo: string) => `https://github.com/${repo}`,
