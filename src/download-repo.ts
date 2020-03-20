@@ -28,7 +28,7 @@ function getMapStream(templateVariables: Set<string>, globsToIgnore: string[]) {
 
     fileStream.on('data', (chunk) => templateChunks.push(chunk.toString()));
     fileStream.on('end', () => {
-      const template: string[] = parse(templateChunks.join(''));
+      const template = parse(templateChunks.join(''));
       template
         .filter((entry) => entry[0] === 'name')
         .map((entry) => entry[1])
