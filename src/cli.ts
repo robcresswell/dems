@@ -1,10 +1,10 @@
 import { join } from 'path';
-import { walkAndRender } from './walk';
-import { help } from './help';
-import { getValidConfig } from './validate';
 import { downloadRepo } from './download-repo';
-import { prompt } from './prompt';
+import { help } from './help';
 import { debug } from './log';
+import { prompt } from './prompt';
+import { getValidConfig } from './validate';
+import { walkAndRender } from './walk';
 
 export async function cli(
   args: string[],

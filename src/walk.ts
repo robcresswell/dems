@@ -1,7 +1,7 @@
-import { render } from 'mustache';
 import { promises as fsp } from 'fs';
+import * as minimatch from 'minimatch';
+import { render } from 'mustache';
 import { join, resolve } from 'path';
-import minimatch from 'minimatch';
 import { debug } from './log';
 
 export async function walkAndRender(
