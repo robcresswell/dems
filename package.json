@@ -33,7 +33,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.8.2",
-    "jest": "^25.5.0",
+    "jest": "^25.5.2",
     "jest-junit": "^10.0.0",
     "minimatch": "^3.0.4",
     "mustache": "^4.0.1",
