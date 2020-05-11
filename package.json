@@ -38,7 +38,7 @@
     "minimatch": "^3.0.4",
     "mustache": "^4.0.1",
     "prettier": "^1.19.1",
-    "tar-fs": "^2.0.1",
+    "tar-fs": "^2.1.0",
     "ts-jest": "^25.5.1",
     "typescript": "^3.8.3"
   }
