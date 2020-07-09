@@ -8,7 +8,7 @@ export async function walkAndRender(
   dir: string,
   templateVariables: { [key: string]: string },
   ignoreGlobs: string[],
-) {
+): Promise<void> {
   const files = await fsp.readdir(dir, { withFileTypes: true });
 
   await Promise.all(

@@ -21,10 +21,7 @@ export async function getGlobsToIgnore(
         });
 
         response.on('end', () => {
-          globs = globChunks
-            .join('')
-            .split('\n')
-            .filter(Boolean);
+          globs = globChunks.join('').split('\n').filter(Boolean);
           resolve(globs);
         });
       });
