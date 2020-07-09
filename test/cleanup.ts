@@ -24,7 +24,7 @@ function deleteDirectory(path: string) {
  * that due to performance issues with Jest and parallelism in CircleCI,
  * --runInBand is recommended anyway.
  */
-export function removeTestDir() {
+export function removeTestDir(): void {
   const fixturePaths = ['dems-example', 'dems-fixture-with-ignores'];
 
   fixturePaths.forEach((fixturePath) => {

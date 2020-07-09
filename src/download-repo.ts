@@ -8,10 +8,7 @@ import { Config } from './types';
 
 function map(header: Headers) {
   // eslint-disable-next-line no-param-reassign
-  header.name = header.name
-    .split('/')
-    .slice(1)
-    .join('/');
+  header.name = header.name.split('/').slice(1).join('/');
   return header;
 }
 

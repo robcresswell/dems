@@ -6,12 +6,12 @@ const cyan = '\x1b[36m';
 
 export const debug = debuglog('dems');
 
-export function logError(message: string) {
+export function logError(message: string): void {
   // eslint-disable-next-line no-console
   console.error(`${red}${message}${reset}`);
 }
 
-export function logInfo(message: string) {
+export function logInfo(message: string): void {
   // eslint-disable-next-line no-console
   console.error(`${cyan}${message}${reset}`);
 }
