@@ -37,7 +37,7 @@
     "jest-junit": "^11.1.0",
     "minimatch": "^3.0.4",
     "mustache": "^4.0.1",
-    "prettier": "^2.0.5",
+    "prettier": "^2.1.0",
     "tar-fs": "^2.1.0",
     "ts-jest": "^26.2.0",
     "typescript": "^3.9.7"
